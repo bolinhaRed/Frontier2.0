@@ -1,0 +1,17 @@
+/* O mapa ocupa todo o ecrã; a interface flutua por cima sem o tapar permanentemente */
+.app { position: fixed; inset: 0; }
+.map { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; cursor: grab; }
+.map:active { cursor: grabbing; }
+
+.mapctl {
+  position: absolute; right: calc(12px + var(--safe-r)); top: 50%; transform: translateY(-50%);
+  display: flex; flex-direction: column; gap: 10px; z-index: 5;
+}
+@media (max-width: 819px) {
+  .mapctl { top: auto; transform: none; bottom: calc(86px + var(--safe-b)); gap: 8px; }
+  .mapctl .icon-btn { width: 40px; height: 40px; }
+  .app.sheet-open .mapctl { display: none; }
+}
+@media (min-width: 820px) {
+  .app.panel-open .mapctl { right: calc(360px + var(--safe-r)); }
+}

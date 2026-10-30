@@ -1,0 +1,91 @@
+/* FRONTIER — base: tipografia, cores e pergaminho */
+@font-face { font-family: "IM Fell English SC"; src: url(../assets/fonts/im-fell-english-sc-latin-400-normal.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Alegreya"; font-weight: 400; src: url(../assets/fonts/alegreya-latin-400-normal.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Alegreya"; font-weight: 400; font-style: italic; src: url(../assets/fonts/alegreya-latin-400-italic.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Alegreya"; font-weight: 600; src: url(../assets/fonts/alegreya-latin-600-normal.woff2) format("woff2"); font-display: swap; }
+@font-face { font-family: "Alegreya"; font-weight: 700; src: url(../assets/fonts/alegreya-latin-700-normal.woff2) format("woff2"); font-display: swap; }
+
+:root {
+  --paper: #ecdfc0;
+  --paper-2: #e3d2ab;
+  --paper-3: #f6edd8;
+  --ink: #2f2216;
+  --ink-2: #5b4429;
+  --ink-3: #8a7150;
+  --rule: #b59a6b;
+  --gold: #c8922e;
+  --gold-2: #f2c14e;
+  --wax: #8e3324;
+  --moss: #4f6b33;
+  --shadow: 0 6px 18px rgba(47, 34, 22, .28), 0 1px 0 rgba(255, 250, 235, .6) inset;
+  --f-title: "IM Fell English SC", "Palatino Linotype", Georgia, serif;
+  --f-body: "Alegreya", "Palatino Linotype", Georgia, serif;
+  --safe-t: env(safe-area-inset-top, 0px);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-l: env(safe-area-inset-left, 0px);
+  --safe-r: env(safe-area-inset-right, 0px);
+  color-scheme: light;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; height: 100%; overflow: hidden; }
+body {
+  font: 16px/1.4 var(--f-body);
+  color: var(--ink);
+  background-color: var(--paper);
+  /* pergaminho: grão + manchas + vinheta */
+  background-image:
+    radial-gradient(ellipse at 50% 45%, rgba(255, 248, 228, .55) 0%, rgba(255, 248, 228, 0) 55%),
+    radial-gradient(ellipse at 50% 50%, rgba(0, 0, 0, 0) 60%, rgba(92, 62, 26, .28) 100%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .35 0 0 0 0 .25 0 0 0 0 .12 0 0 0 .09 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='900' height='900'%3E%3Cfilter id='m'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.006' numOctaves='3'/%3E%3CfeColorMatrix values='0 0 0 0 .55 0 0 0 0 .4 0 0 0 0 .2 0 0 0 .22 -.04'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23m)'/%3E%3C/svg%3E");
+  -webkit-tap-highlight-color: transparent;
+  -webkit-font-smoothing: antialiased;
+  user-select: none; -webkit-user-select: none;
+}
+button { font: inherit; color: inherit; }
+[hidden] { display: none !important; }
+svg { width: 1em; height: 1em; }
+svg .s { fill: none; stroke: currentColor; stroke-width: 1.7; stroke-linecap: round; stroke-linejoin: round; }
+svg .f { fill: currentColor; }
+:focus-visible { outline: 2px solid var(--gold); outline-offset: 2px; }
+
+.title { font-family: var(--f-title); font-weight: 400; letter-spacing: .06em; margin: 0; }
+
+/* botões de tinta, à maneira de um tabuleiro */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5em;
+  min-height: 46px; padding: .55em 1.2em;
+  border: 2px solid var(--ink); border-radius: 6px;
+  background: var(--paper-3); color: var(--ink);
+  font-family: var(--f-title); font-size: 1.1rem; letter-spacing: .05em;
+  box-shadow: 0 3px 0 var(--ink), 0 5px 10px rgba(47, 34, 22, .2);
+  cursor: pointer; transition: transform .08s, box-shadow .08s, background .15s;
+}
+.btn:hover:not(:disabled) { background: #fff7e4; }
+.btn:active:not(:disabled) { transform: translateY(2px); box-shadow: 0 1px 0 var(--ink), 0 2px 5px rgba(47, 34, 22, .2); }
+.btn:disabled { opacity: .45; cursor: not-allowed; box-shadow: 0 3px 0 rgba(47,34,22,.5); }
+.btn.primary { background: var(--ink); color: var(--paper-3); }
+.btn.primary:hover:not(:disabled) { background: #3e2d1c; }
+.btn.small { min-height: 38px; font-size: .95rem; padding: .35em .9em; }
+.btn svg { font-size: 1.25em; }
+
+.icon-btn {
+  width: 44px; height: 44px; display: inline-grid; place-items: center;
+  border: 2px solid var(--ink); border-radius: 50%;
+  background: var(--paper-3); color: var(--ink); cursor: pointer;
+  box-shadow: 0 2px 0 var(--ink), 0 4px 10px rgba(47, 34, 22, .2);
+  transition: transform .08s, background .15s;
+}
+.icon-btn svg { font-size: 22px; }
+.icon-btn:hover { background: #fff7e4; }
+.icon-btn:active { transform: translateY(2px); box-shadow: 0 0 0 var(--ink); }
+.icon-btn[aria-pressed="false"] { background: var(--paper-2); color: var(--ink-3); }
+
+.loading { position: fixed; inset: 0; display: grid; place-content: center; justify-items: center; gap: 14px; z-index: 100; }
+.loading .title.small { font-size: 2.4rem; }
+.loading .bar { width: 220px; height: 8px; border: 2px solid var(--ink); border-radius: 6px; overflow: hidden; background: var(--paper-3); }
+.loading .bar span { display: block; height: 100%; width: 0; background: var(--ink-2); transition: width .2s; }
+.loading-text { margin: 0; color: var(--ink-2); font-style: italic; }
+
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }

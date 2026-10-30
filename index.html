@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="pt">
+<head>
+<meta charset="utf-8">
+<title>FRONTIER — Realms of the Unknown</title>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<meta name="theme-color" content="#2f2216">
+<meta name="description" content="Exploração, construção e expansão em mapas hexagonais de fantasia.">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="assets/icons/icon-192.png">
+<link rel="apple-touch-icon" href="assets/icons/icon-192.png">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/map.css">
+<link rel="stylesheet" href="css/interface.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-food" viewBox="0 0 24 24"><path d="M12 21V6"/><path d="M12 9c-2.4-.6-3.6-2.4-3.6-4.8 2.2.6 3.6 2.4 3.6 4.8zm0 0c2.4-.6 3.6-2.4 3.6-4.8-2.2.6-3.6 2.4-3.6 4.8zM12 13.5c-2.4-.6-3.6-2.4-3.6-4.8 2.2.6 3.6 2.4 3.6 4.8zm0 0c2.4-.6 3.6-2.4 3.6-4.8-2.2.6-3.6 2.4-3.6 4.8zM12 18c-2.4-.6-3.6-2.4-3.6-4.8 2.2.6 3.6 2.4 3.6 4.8zm0 0c2.4-.6 3.6-2.4 3.6-4.8-2.2.6-3.6 2.4-3.6 4.8z" fill="currentColor" stroke="none"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-wood" viewBox="0 0 24 24"><path d="M7 7h11a3 5 0 0 1 0 10H7"/><ellipse cx="7" cy="12" rx="3" ry="5"/><ellipse cx="7" cy="12" rx="1" ry="2"/><path d="M12 10h4M11 14h5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-stone" viewBox="0 0 24 24"><path d="M3.5 17.5l2-6.5 5-4 6.5 1 3.5 5-2 5.5H6z"/><path d="M10.5 7l1.5 5 7 1M12 12l-3 6"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-ore" viewBox="0 0 24 24"><path d="M4 9.5c4-4.5 10-5.5 15-3"/><path d="M11.5 6.5L18 21"/><path d="M5 18l2-2 2 1 1 2-2 2-2-1z"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-gold" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="5"/><path d="M12 9.5v5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-water" viewBox="0 0 24 24"><path d="M12 3c3 5 6 8 6 11.5a6 6 0 0 1-12 0C6 11 9 8 12 3z"/><path d="M9.5 15a2.5 2.5 0 0 0 2.5 2.5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-herbs" viewBox="0 0 24 24"><path d="M5 19c0-8 6-13 14-14-1 8-6 14-14 14zM5 19l8-8"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-furs" viewBox="0 0 24 24"><path d="M7 4l2 3h6l2-3 1.5 5-2 3 2 7-4.5-2-2 3-2-3-4.5 2 2-7-2-3z"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-crystal" viewBox="0 0 24 24"><path d="M12 3l5 6-5 12-5-12zM7 9h10M12 3v18"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-explore" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-build" viewBox="0 0 24 24"><path d="M13 4l7 7-2.2 2.2-7-7zM12.5 9.5L4 18l2 2 8.5-8.5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-gather" viewBox="0 0 24 24"><path d="M4 10h16l-2 9.5H6zM8 10l4-6 4 6M9 14v2.5M12 14v2.5M15 14v2.5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-tech" viewBox="0 0 24 24"><path d="M6 4h10a3 3 0 0 1 3 3v13H9a3 3 0 0 1-3-3zM6 17a3 3 0 0 1 3-3h10M10 7.5h5M10 10.5h4"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-pop" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><circle cx="16.5" cy="9" r="2.4"/><path d="M3.5 20c0-3.6 2.4-6 5.5-6s5.5 2.4 5.5 6M15 14.2c3 .1 5.5 2 5.5 5.3"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-missions" viewBox="0 0 24 24"><path d="M6 21V3.5M6 4.5h11.5l-2.2 4 2.2 4H6"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-minus" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-home" viewBox="0 0 24 24"><path d="M4 11l8-6.5 8 6.5M6.5 9.5V20h11V9.5M10 20v-5h4v5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-fit" viewBox="0 0 24 24"><path d="M4 9V4h5M15 4h5v5M20 15v5h-5M9 20H4v-5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-eye" viewBox="0 0 24 24"><path d="M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-dice" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><circle cx="8.5" cy="8.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="15.5" cy="15.5" r="1.2" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.2" fill="currentColor" stroke="none"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-lock" viewBox="0 0 24 24"><rect x="5.5" y="10.5" width="13" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-sound" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-mute" viewBox="0 0 24 24"><path d="M4 9.5h3.5L12 5.5v13l-4.5-4H4z"/><path d="M16 9.5l5 5M21 9.5l-5 5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-supply" viewBox="0 0 24 24"><path d="M7 8c0-2 2-3.5 5-3.5S17 6 17 8"/><path d="M5.5 9h13l-1.2 9.5a2 2 0 0 1-2 1.8H8.7a2 2 0 0 1-2-1.8z"/><path d="M9.5 9V7.5M14.5 9V7.5M9 13.5h6"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-pack" viewBox="0 0 24 24"><path d="M8 6.5V5a4 4 0 0 1 8 0v1.5"/><rect x="5" y="6.5" width="14" height="14" rx="3"/><path d="M8.5 12h7v4h-7z"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-camp" viewBox="0 0 24 24"><path d="M3 20h18M12 4l-8 16M12 4l8 16M12 4v16M9.5 20l2.5-5 2.5 5"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-rest" viewBox="0 0 24 24"><path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/><path d="M14 4h3l-3 3.5h3"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-tower" viewBox="0 0 24 24"><path d="M8 21V9h8v12M7 9V5h2v2h2V5h2v2h2V5h2v4M11 21v-4h2v4M6 21h12"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-undo" viewBox="0 0 24 24"><path d="M9 7L4.5 11.5 9 16"/><path d="M5 11.5h9.5a5 5 0 0 1 0 10H11"/></symbol>
+    <symbol fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" id="i-next" viewBox="0 0 24 24"><path d="M5 12h12M13 6.5l5.5 5.5-5.5 5.5"/></symbol>
+  </defs>
+</svg>
+
+<div id="app" class="app" hidden>
+  <canvas id="map" class="map" aria-label="Mapa hexagonal"></canvas>
+
+  <header class="topbar">
+    <button class="icon-btn" id="btnMenu" aria-label="Menu"><svg><use href="#i-menu"/></svg></button>
+    <div class="tb-place">
+      <span class="tb-region" id="tbRegion">—</span>
+      <span class="tb-sub" id="tbSub">—</span>
+    </div>
+    <div class="tb-time">
+      <span class="tb-season" id="tbSeason">Primavera</span>
+      <span class="tb-turn" id="tbTurn">Turno 1</span>
+    </div>
+    <div class="tb-res" id="tbRes" title="Reservas iniciais — a produção por turnos chega na Fase 2"></div>
+  </header>
+
+  <aside class="panel" id="panel" aria-live="polite" hidden></aside>
+
+  <div class="mapctl" id="mapctl">
+    <button class="icon-btn" data-ctl="in" aria-label="Aproximar"><svg><use href="#i-plus"/></svg></button>
+    <button class="icon-btn" data-ctl="out" aria-label="Afastar"><svg><use href="#i-minus"/></svg></button>
+    <button class="icon-btn" data-ctl="home" aria-label="Centrar na aldeia"><svg><use href="#i-home"/></svg></button>
+    <button class="icon-btn" data-ctl="fit" aria-label="Ver o mapa todo"><svg><use href="#i-fit"/></svg></button>
+    <button class="icon-btn" data-ctl="fog" aria-label="Névoa de guerra" aria-pressed="true"><svg><use href="#i-eye"/></svg></button>
+    <button class="icon-btn sound-btn" data-ctl="sound" aria-label="Som"><svg><use href="#i-sound"/></svg></button>
+  </div>
+
+  <div class="hint" id="hint" hidden></div>
+  <div class="banner" id="banner" hidden></div>
+  <section class="dock" id="dock" aria-label="Exploradores e ações"></section>
+
+  <div class="toasts" id="toasts" aria-live="polite"></div>
+</div>
+
+<section class="screen menu" id="menu" hidden>
+  <button class="icon-btn sound-btn menu-sound" id="mSound" aria-label="Som"><svg><use href="#i-sound"/></svg></button>
+  <div class="menu-inner">
+    <div class="menu-tiles" id="menuTiles" aria-hidden="true"></div>
+    <h1 class="title">Frontier</h1>
+    <p class="subtitle">Realms of the Unknown</p>
+    <nav class="menu-list">
+      <button class="btn primary" id="mContinue">Continuar campanha</button>
+      <button class="btn" id="mNewCampaign">Campanhas</button>
+      <button class="btn" id="mExpedition">Expeditions</button>
+      <div class="menu-row">
+        <button class="btn small" id="mRecords">Recordes</button>
+        <button class="btn small" id="mOptions">Opções</button>
+        <button class="btn small" id="mHelp">Como jogar</button>
+        <button class="btn small" id="mCredits">Créditos</button>
+      </div>
+    </nav>
+    <p class="menu-foot" id="menuFoot"></p>
+  </div>
+</section>
+
+<div class="modal" id="modal" hidden><div class="modal-card" id="modalCard" role="dialog" aria-modal="true"></div></div>
+
+<div class="loading" id="loading">
+  <p class="title small">Frontier</p>
+  <div class="bar"><span id="loadBar"></span></div>
+  <p class="loading-text" id="loadText">A desenrolar o mapa…</p>
+</div>
+
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
